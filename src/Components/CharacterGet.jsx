@@ -2,17 +2,14 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const Character = () => {
-    const [name, setName] = useState("");
-    const [species, setSpecies] = useState("");
-    const [colour, setColour] = useState("");
-    const [occupation, setOccupation] = useState("");
-    const [hobby, setHobby] = useState("");
+    const [data, setData] = useState([]);
+    
 
 const changeHandler=(e) => {
     e.preventDefault();
 }
 
-body = {
+const body = {
     name: name,
     species: species,
     colour: colour,
@@ -20,19 +17,17 @@ body = {
     hobby: hobby
 }
 
-axios.post('https://localhost:1045/createCharacter', postData
-    .then((response) => {
-        console.log('success')
-        setData({
-            name: "",
-            species: "",
-            colour: "",
-            occupation: "",
-            hobby: ""
-    }).catch(err)
-        console.error('error')
+useEffect(() => {
+const getCharacter = async () => {
+    try {
+        const res = await axios.get('https://localhost:1045/getAll');
+        console.log("response:", res);
+        setData(res.data);
+        } catch(err){
+            console.error("error");
+        }
     }
-    
+})
 
 return(
     <>
@@ -70,6 +65,7 @@ return(
         <button onClick={post}>Submit</button>
     </form>
     </>
-);
-}
-export default Character;
+)
+    }
+
+export default CharacterGet;
