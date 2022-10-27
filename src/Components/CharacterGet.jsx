@@ -3,65 +3,35 @@ import axios from 'axios';
 
 const CharacterGet = () => {
 
-    const [name, setName] = useState("");
-    const [species, setSpecies] = useState("");
-    const [colour, setColour] = useState("");
-    const [occupation, setOccupation] = useState("");
-    const [hobby, setHobby] = useState("");
+    const [chars, setChars] = useState([]);
 
-    const submitHandler = (e) => {
-        e.preventDefault();
-
-        axios.post('http://localhost:1045/createCharacter', {
-            name,
-            species,
-            colour,
-            occupation,
-            hobby
-        }).then((response) => {
+    const getCharacters = () => {
+        axios.get('http://localhost:1045/getAll'
+        ).then((response) => {
             console.log('success', response.data)
-            // setData(postData);
+            setChars(response.data);
         }).catch(err => console.error('error'))
     }
 
+    useEffect(() => { getCharacters(); }, []); // empty brackets -> only runs on first load
 
-return(
-    <>
-    <form onSubmit={changeHandler}>
-        <label>Name</label>
-        <input name="name"
-        type="text"
-        value={name}
-        onChange={e => setName(e.target.value)}/>
 
-        <label>Species</label>
-        <input name="species"
-        type="text"
-        value={species}
-        onChange={e => setSpecies(e.target.value)}/>
-
-        <label>Colour</label>
-        <input name="colour"
-        type="text"
-        value={colour}
-        onChange={e => setColour(e.target.value)}/>
-
-        <label>Occupation</label>
-        <input name="Occupation"
-        type="text"
-        value={occupation}
-        onChange={e => setOccupation(e.target.value)}/>
-
-        <label>Hobby</label>
-        <input name="Hobby"
-        type="text"
-        value={hobby}
-        onChange={e => setHobby(e.target.value)}/>
-        <br/>
-        <button onClick={post}>Submit</button>
-    </form>
-    </>
-)
-    }
+    return (
+        <>
+            {
+                chars.map(char => (
+                    <div>
+                        <p>{`Name: ${char.name}`}</p>
+                        <p>{`Species: ${char.species}`}</p>
+                        <p>{`Colour: ${char.colour}`}</p>
+                        <p>{`Occupation: ${char.occupation}`}</p>
+                        <p>{`Hobby: ${char.hobby}`}</p>
+                        <button type="button">DELETE</button>
+                    </div>
+                ))
+           }
+        </>
+    )
+}
 
 export default CharacterGet;

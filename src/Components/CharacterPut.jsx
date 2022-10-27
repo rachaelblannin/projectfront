@@ -9,10 +9,12 @@ const CharacterPut = () => {
     const [occupation, setOccupation] = useState("");
     const [hobby, setHobby] = useState("");
 
-    const submitHandler = (e) => {
+    const changeHandler = (e) => {
         e.preventDefault();
+    }
 
-        axios.put('http://localhost:1045/createCharacter', {
+        const post = () => {
+        axios.put('http://localhost:1045/replace/:id', {
             name,
             species,
             colour,

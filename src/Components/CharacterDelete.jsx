@@ -10,10 +10,11 @@ import axios from 'axios';
         const [hobby, setHobby] = useState("");
     
 
-    const submitHandler = (e) => {
+    const changeHandler = (e) => {
          e.preventDefault();
+    }
 
-   
+    const post = () => {
     axios.delete('http://localhost:1045/delete/:id', {
             name,
             species,
