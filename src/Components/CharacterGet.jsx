@@ -1,33 +1,29 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const Character = () => {
-    const [data, setData] = useState([]);
-    
+const CharacterGet = () => {
 
-const changeHandler=(e) => {
-    e.preventDefault();
-}
+    const [name, setName] = useState("");
+    const [species, setSpecies] = useState("");
+    const [colour, setColour] = useState("");
+    const [occupation, setOccupation] = useState("");
+    const [hobby, setHobby] = useState("");
 
-const body = {
-    name: name,
-    species: species,
-    colour: colour,
-    occupation: occupation,
-    hobby: hobby
-}
+    const submitHandler = (e) => {
+        e.preventDefault();
 
-useEffect(() => {
-const getCharacter = async () => {
-    try {
-        const res = await axios.get('https://localhost:1045/getAll');
-        console.log("response:", res);
-        setData(res.data);
-        } catch(err){
-            console.error("error");
-        }
+        axios.post('http://localhost:1045/createCharacter', {
+            name,
+            species,
+            colour,
+            occupation,
+            hobby
+        }).then((response) => {
+            console.log('success', response.data)
+            // setData(postData);
+        }).catch(err => console.error('error'))
     }
-})
+
 
 return(
     <>
