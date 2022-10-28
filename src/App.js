@@ -4,6 +4,7 @@ import CharacterCreate from './Components/CharacterCreate';
 // import CharacterDelete from './Components/CharacterDelete';
 // import CharacterPut from './Components/CharacterPut';
 import CharacterGet from './Components/CharacterGet';
+import paramsCharacter from './Components/params';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
      
       <CharacterCreate/>
       <CharacterGet/>
+      <paramsCharacter/>
       
     </div>
   );

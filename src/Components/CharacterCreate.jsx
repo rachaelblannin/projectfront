@@ -34,24 +34,32 @@ const CharacterCreate = () => {
                     type="text"
                     value={name}
                     onChange={e => setName(e.target.value)} />
+                    <br/>
+                    <br/>
 
                 <label>Species</label>
                 <input name="species"
                     type="text"
                     value={species}
                     onChange={e => setSpecies(e.target.value)} />
+                    <br/>
+                    <br/>
 
                 <label>Colour</label>
                 <input name="colour"
                     type="text"
                     value={colour}
                     onChange={e => setColour(e.target.value)} />
+                    <br/>
+                    <br/>
 
                 <label>Occupation</label>
                 <input name="Occupation"
                     type="text"
                     value={occupation}
                     onChange={e => setOccupation(e.target.value)} />
+                    <br/>
+                    <br/>
 
                 <label>Hobby</label>
                 <input name="Hobby"

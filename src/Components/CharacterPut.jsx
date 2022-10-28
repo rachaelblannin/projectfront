@@ -1,6 +1,16 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
+const updateCharacter = ({character, setCharacter}) =>{
+    const {id} = useParams();
+    const updateCharacter = character.find((character)=> character.id === id);
+}
+
+const onSubmit = (character) => {
+    const filterCharacter = character.filter((character) => character.id !== id);
+    setCharacter([character, ...filterCharacter]);
+}
+
 const CharacterPut = () => {
 
     const [name, setName] = useState("");
@@ -60,7 +70,7 @@ const CharacterPut = () => {
                 value={hobby}
                 onChange={e => setHobby(e.target.value)}/>
                 <br/>
-                <button onClick={post}>Submit</button>
+                <button onClick={post}>Update</button>
             </form>
             </>
         )
