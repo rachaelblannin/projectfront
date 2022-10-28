@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Navigate, useNavigate } from 'react-router';
 
 const CharacterGet = () => {
 
     const [chars, setChars] = useState([]);
+    const navigate = useNavigate();
 
     const getCharacters = () => {
         axios.get('http://localhost:1045/getAll'
@@ -16,6 +18,10 @@ const CharacterGet = () => {
     useEffect(() => { getCharacters(); }, []); // empty brackets -> only runs on first load
 
 
+    const handleDelete = async (id) => {
+        await axios.delete("http://localhost:1045/delete/" + id);
+        getCharacters();
+    }
     return (
         <>
             {
@@ -26,7 +32,8 @@ const CharacterGet = () => {
                         <p>{`Colour: ${char.colour}`}</p>
                         <p>{`Occupation: ${char.occupation}`}</p>
                         <p>{`Hobby: ${char.hobby}`}</p>
-                        <button type="button">DELETE</button>
+                        <button type="button" onClick={() => handleDelete(char._id)}>DELETE</button>
+                        <button onClick={() => navigate("/replace/" + char._id)}>UPDATE</button>
                     </div>
                 ))
            }

@@ -1,30 +1,21 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router';
 
-const updateCharacter = ({character, setCharacter}) =>{
-    const {id} = useParams();
-    const updateCharacter = character.find((character)=> character.id === id);
-}
 
-const onSubmit = (character) => {
-    const filterCharacter = character.filter((character) => character.id !== id);
-    setCharacter([character, ...filterCharacter]);
-}
 
 const CharacterPut = () => {
 
+    const {id} = useParams();
     const [name, setName] = useState("");
     const [species, setSpecies] = useState("");
     const [colour, setColour] = useState("");
     const [occupation, setOccupation] = useState("");
     const [hobby, setHobby] = useState("");
 
-    const changeHandler = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-    }
-
-        const post = () => {
-        axios.put('http://localhost:1045/replace/:id', {
+        axios.put('http://localhost:1045/replace/' + id, {
             name,
             species,
             colour,
@@ -38,8 +29,7 @@ const CharacterPut = () => {
 
 
         return(
-            <>
-            <form onSubmit={changeHandler}>
+            <form onSubmit={handleSubmit}>
                 <label>Name</label>
                 <input name="name"
                 type="text"
@@ -70,9 +60,8 @@ const CharacterPut = () => {
                 value={hobby}
                 onChange={e => setHobby(e.target.value)}/>
                 <br/>
-                <button onClick={post}>Update</button>
+                <button>Update</button>
             </form>
-            </>
         )
             }
         
